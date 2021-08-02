@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'authapp',
     'basketapp',
     'adminapp',
+    'ordersapp',
 
     'social_django',
 ]
@@ -83,6 +84,8 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.load_extra_data',
     'social_core.pipeline.user.user_details',
 )
+
+
 WSGI_APPLICATION = 'geekshop.wsgi.application'
 
 
@@ -162,22 +165,20 @@ DOMAIN_NAME = 'http://127.0.0.1:8000'
 # EMAIL_USE_SSL = False
 
 EMAIL_HOST = 'smtp.mailtrap.io'
-EMAIL_HOST_USER = '6138662d624633'
-EMAIL_HOST_PASSWORD = '9ec7547a94560f'
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = '465'
 EMAIL_USE_TLS = True
 
-# vk_id = '7911593'
-# vk_key = 'O5coaUvc88Gy8xwzyUGo'
-# vk_secret = 'c604ed01c604ed01c604ed01dac67c55a8cc604c604ed01a6fac301142422d90345c001'
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    'social_core.backends.vk.VKOAuth2'
+    'social_core.backends.vk.VKOAuth2',
 )
+
 # если храним секреты в файле vk.json
-with open('geekshop/vk.json', 'r') as file:
-    VK = json.load(file)
+# with open('geekshop/vk.json', 'r') as file:
+#     VK = json.load(file)
 #
 # SOCIAL_AUTH_VK_OAUTH2_KEY = VK['SOCIAL_AUTH_VK_OAUTH2_ID']
 # SOCIAL_AUTH_VK_OAUTH2_SECRET = VK['SOCIAL_AUTH_VK_OAUTH2_KEY']
